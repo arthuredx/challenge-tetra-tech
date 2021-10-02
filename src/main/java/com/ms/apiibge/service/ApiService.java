@@ -24,6 +24,12 @@ public class ApiService {
 
     private final String fileName = "/logs/log-api-ibge.txt";
 
+    /**
+     * Método para buscar dados na API pública do IBGE e logar os dados em arquivo txt.
+     *
+     * @return Optional<PopulacaoDto>
+     * @author Arthur Edson
+     */
     public Optional<PopulacaoDto> buscar() {
 
         PopulacaoDto populacao = ConsumirApi.buscarInformacoesIbge();
@@ -37,6 +43,12 @@ public class ApiService {
         return opt;
     }
 
+    /**
+     * Método para incluir arquivo de Log ou popular.
+     *
+     * @param populacao Objeto de retorno da API do IBGE
+     * @author Arthur Edson
+     */
     private void logaDados(PopulacaoDto populacao) {
         File file = new File(fileName);
         LocalDateTime dataChamada = LocalDateTime.now();
@@ -57,7 +69,7 @@ public class ApiService {
             BufferedWriter writer = null;
             try {
                 writer = new BufferedWriter(new FileWriter(fileName, true));
-                writer.append("\n"+dados);
+                writer.append("\n" + dados);
                 writer.close();
             } catch (IOException e) {
                 log.warning("Ocorreu algum erro ao reescrever o arquivo");
@@ -66,6 +78,12 @@ public class ApiService {
         }
     }
 
+    /**
+     * Método para buscar dados na API pública do IBGE e logar dados em arquivo txt.
+     *
+     * @param localidade Identificador da localidade. Use o código BR ou 0 para referir-se ao Brasil.
+     * @author Arthur Edson
+     */
     public Optional<PopulacaoDto> buscarPorLocalidade(String localidade) {
 
         PopulacaoDto populacao = null;
@@ -74,21 +92,33 @@ public class ApiService {
             populacao = ConsumirApi.buscarInformacoesIbgePorLocalidade(localidade);
         }
 
-
         Optional<PopulacaoDto> opt = Optional.ofNullable(populacao);
+
+        if (opt.isPresent()) {
+            logaDados(populacao);
+        }
+
         return opt;
     }
 
-
+    /**
+     * Método utilizado para buscar as últimas chamadas que foram logadas.
+     *
+     * @author Arthur Edson
+     */
     public List<String> buscaUltimasChamadas() {
 
         List<String> lines = readLastLine(new File(fileName), 10);
-        lines.forEach(x -> System.out.println(x));
+
         return lines;
 
     }
 
-    // Apache Commons IO ReversedLinesFileReader para ler as últimas linhas do arquivo de Log.
+    /**
+     * Método Apache Commons IO ReversedLinesFileReader para ler as últimas linhas do arquivo de Log.
+     *
+     * @author Arthur Edson
+     */
     public List<String> readLastLine(File file, int numLastLineToRead) {
 
         List<String> result = new ArrayList<>();
