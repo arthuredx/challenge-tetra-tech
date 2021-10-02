@@ -1,19 +1,21 @@
-# Getting Started
+# API IBGE
 
-### Reference Documentation
+### Documentação de referência
 
-For further reference, please consider the following sections:
+Para referência futura, considere as seguintes seções:
 
 * [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
 * [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.5.5/maven-plugin/reference/html/)
 * [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.5.5/maven-plugin/reference/html/#build-image)
 * [Spring Web](https://docs.spring.io/spring-boot/docs/2.5.5/reference/htmlsingle/#boot-features-developing-web-applications)
 
-### Guides
+### Tecnologias
 
-The following guides illustrate how to use some features concretely:
+* Java 8
+* Spring Boot
+* Sring Web.
+* Lombok
 
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
+### Guias
 
+* Deverá criar uma pasta para logs na raiz do SO. Ex: C:\logs
